@@ -1,0 +1,96 @@
+buildscript {
+    ext {
+        springBootVersion = '1.2.5.RELEASE'
+    }
+    repositories {
+        mavenLocal()
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("io.spring.gradle:dependency-management-plugin:0.5.2.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse-wtp'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'war'
+//apply plugin: 'sonar-runner'
+//apply plugin: 'checkstyle'
+//apply plugin: 'findbugs'
+
+war {
+    archiveName 'oopractice.war'
+    baseName = 'oobootcamp-tw'
+    version = '0.0.1-SNAPSHOT'
+}
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenLocal()
+    jcenter()
+    mavenCentral()
+}
+
+configurations {
+    providedRuntime
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-aop")
+//    compile("org.springframework.boot:spring-boot-starter-data-jpa")
+//    compile("org.springframework.boot:spring-boot-starter-data-rest")
+//    compile("org.springframework.boot:spring-boot-starter-jdbc")
+//    compile "org.springframework.boot:spring-boot-starter-security"
+//    compile("org.springframework.boot:spring-boot-starter-mail")
+//    compile("org.springframework.boot:spring-boot-starter-redis")
+    compile("org.springframework.boot:spring-boot-starter-web")
+//    compile("org.springframework.boot:spring-boot-starter-ws")
+//    runtime("com.h2database:h2")
+//    runtime("mysql:mysql-connector-java")
+//    providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+    compile group: 'com.google.guava', name: 'guava', version: '18.0'
+//    compile group: 'net.sourceforge.jtds', name: 'jtds', version: '1.3.1'
+}
+
+
+eclipse {
+    classpath {
+        containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
+        containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.3'
+}
+
+
+//sonarRunner {
+//    sonarProperties {
+//        property "sonar.host.url", "http://localhost:9000"
+//        property "sonar.jdbc.url", "jdbc:mysql://localhost:3306/sonarqube?useUnicode=true&characterEncoding=utf8"
+//        property "sonar.jdbc.driverClassName", "com.mysql.jdbc.Driver"
+//        property "sonar.jdbc.username", "sonaruser"
+//        property "sonar.jdbc.password", "sonarpassword"
+//        property "sonar.exclusions", "**/*Entity.java, **/*EntityPK.java, **/OOBootCampApplication.java"
+//    }
+//}
+//
+//checkstyle {
+//    configFile = rootProject.file('src/main/resources/config/checkstyle.xml')
+//    ignoreFailures = true
+//}
+//
+//findbugs {
+//    ignoreFailures = true
+//    excludeFilter = new File("${project.rootDir}/src/main/resources/config/findbugs-exclude-filter.xml")
+//}
+
+
