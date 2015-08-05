@@ -6,6 +6,6 @@ public class Car {
     }
 
     public boolean leave(ParkingLot parkingLot){
-        return parkingLot.takeOut(this);
+        return parkingLot.pick(this);
     }
 }

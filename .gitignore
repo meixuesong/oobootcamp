@@ -4,3 +4,5 @@ classes/
 .gradle/
 oobootcamp.*
 
+
+gradle.properties

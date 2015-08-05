@@ -29,7 +29,7 @@ public class ParkingLot {
         }
     }
 
-    public boolean takeOut(Car car) {
+    public boolean pick(Car car) {
         if (this.hasParked(car)) {
             this.parkedCars.remove(car);
             return true;
