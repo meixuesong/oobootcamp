@@ -1,0 +1,29 @@
+SmartParkingBoy tasking:
+
+given: 1 parking lot with 1 capacity
+when: parking boy park car
+then: parking lot can pick car
+
+given: 1 parking lot with 1 capacity
+when: parking boy park car
+then: parking boy can pick car
+
+given: 1 parking lot with 1 capacity and 1 car
+when: parking boy park car
+then: parking boy cannot park car
+
+given: 2 parking lot with 1 capacity each
+when: parking boy park car
+then: park boy should be able to pick car
+
+given: 2 parking lot with 2 capacity each, first has one spot second has two
+when: parking boy park car
+then: second parking lot should be able to pick car
+
+given: 2 parking lot with 1 capacity each
+when: parking boy park car
+then: first parking lot should be able to pick car
+
+given: 2 parking lot with 1 capacity each, both full
+when: parking boy park car
+then: parking boy cannot park car

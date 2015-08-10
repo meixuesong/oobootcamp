@@ -7,41 +7,51 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 public class ParkingBoyTest {
+    private static final String CAR_LICENSE = "SOME_CAR_LICENSE";
+    private static final String ANOTHER_CAR_LICENSE = "ANOTHER_CAR_LICENSE";
+
     @Test
      public void should_success_to_park_car_when_one_parkinglot_with_one_capacity(){
+        List<ParkingLot> parkingLots = new ArrayList<>();
         ParkingLot parkingLot = new ParkingLot(1);
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        parkingLots.add(parkingLot);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
 
-        Car car = new Car();
-        parkingBoy.park(car);
+        Car car = new Car(CAR_LICENSE);
+        UUID ticket = parkingBoy.park(car);
 
-        assertTrue(parkingLot.pick(car));
+        assertTrue(car.equals(parkingLot.pick(ticket)));
     }
 
     @Test
     public void should_success_to_pick_car_when_parked_a_car_in_one_parkinglot_with_one_capacity(){
-        ParkingBoy parkingBoy = new ParkingBoy(new ParkingLot(1));
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(new ParkingLot(1));
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
 
-        Car car = new Car();
-        parkingBoy.park(car);
+        Car car = new Car(CAR_LICENSE);
+        UUID ticket = parkingBoy.park(car);
 
-        assertTrue(parkingBoy.pick(car));
+        assertTrue(car.equals(parkingBoy.pick(ticket)));
     }
 
     @Test
     public void should_fail_to_park_car_when_one_parkinglot_with_one_capacity_occupied(){
+        List<ParkingLot> parkingLots = new ArrayList<>();
         ParkingLot parkingLot = new ParkingLot(1);
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
-        parkingLot.park(new Car());
+        parkingLots.add(parkingLot);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+        parkingLot.park(new Car(ANOTHER_CAR_LICENSE));
 
-        Car car = new Car();
+        Car car = new Car(CAR_LICENSE);
 
-        assertFalse(parkingBoy.park(car));
+        assertNull(parkingBoy.park(car));
     }
 
     @Test
@@ -51,10 +61,10 @@ public class ParkingBoyTest {
         parkingLots.add(new ParkingLot(1));
         ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
 
-        Car car = new Car();
-        parkingBoy.park(car);
+        Car car = new Car(CAR_LICENSE);
+        UUID ticket = parkingBoy.park(car);
 
-        assertTrue(parkingBoy.pick(car));
+        assertTrue(car.equals(parkingBoy.pick(ticket)));
     }
 
     @Test
@@ -63,7 +73,7 @@ public class ParkingBoyTest {
         List<ParkingLot> parkingLots = new ArrayList<ParkingLot>();
 
         ParkingLot fullParkingLot = new ParkingLot(1);
-        fullParkingLot.park(new Car());
+        fullParkingLot.park(new Car(ANOTHER_CAR_LICENSE));
         parkingLots.add(fullParkingLot);
 
         ParkingLot emptyParkingLot = new ParkingLot(1);
@@ -72,11 +82,11 @@ public class ParkingBoyTest {
         ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
 
         //when
-        Car car = new Car();
-        parkingBoy.park(car);
+        Car car = new Car(CAR_LICENSE);
+        UUID ticket = parkingBoy.park(car);
 
         //then
-        assertTrue(parkingBoy.pick(car));
+        assertTrue(car.equals(parkingBoy.pick(ticket)));
     }
 
     @Test
@@ -85,7 +95,7 @@ public class ParkingBoyTest {
         List<ParkingLot> parkingLots = new ArrayList<ParkingLot>();
 
         ParkingLot halfFullParkingLot = new ParkingLot(2);
-        halfFullParkingLot.park(new Car());
+        halfFullParkingLot.park(new Car(ANOTHER_CAR_LICENSE));
         parkingLots.add(halfFullParkingLot);
 
         ParkingLot emptyParkingLot = new ParkingLot(1);
@@ -94,11 +104,11 @@ public class ParkingBoyTest {
         ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
 
         //when
-        Car car = new Car();
-        parkingBoy.park(car);
+        Car car = new Car(CAR_LICENSE);
+        UUID ticket = parkingBoy.park(car);
 
         //then
-        assertTrue(halfFullParkingLot.pick(car));
+        assertTrue(car.equals(halfFullParkingLot.pick(ticket)));
     }
 
     @Test
@@ -110,7 +120,7 @@ public class ParkingBoyTest {
         parkingLots.add(firstEmptyParkingLot);
 
         ParkingLot secondFullParkingLot = new ParkingLot(1);
-        secondFullParkingLot.park(new Car());
+        secondFullParkingLot.park(new Car(ANOTHER_CAR_LICENSE));
         parkingLots.add(secondFullParkingLot);
 
         ParkingLot thirdEmptyParkingLot = new ParkingLot(1);
@@ -119,10 +129,10 @@ public class ParkingBoyTest {
         ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
 
         //when
-        Car car = new Car();
-        parkingBoy.park(car);
+        Car car = new Car(CAR_LICENSE);
+        UUID ticket = parkingBoy.park(car);
 
         //then
-        assertTrue(firstEmptyParkingLot.pick(car));
+        assertTrue(car.equals(firstEmptyParkingLot.pick(ticket)));
     }
 }

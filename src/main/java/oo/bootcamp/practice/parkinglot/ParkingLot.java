@@ -1,40 +1,45 @@
 package oo.bootcamp.practice.parkinglot;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public class ParkingLot {
     private int capacity;
-    private List<Car> parkedCars;
+    private Map<UUID, Car> parkedCars;
 
     public ParkingLot(int capacity) {
         this.capacity = capacity;
-        parkedCars = new ArrayList<Car>();
+        parkedCars = new HashMap<>();
     }
 
     private boolean isFull() {
         return this.capacity == parkedCars.size();
     }
 
-    private boolean hasParked(Car car) {
-        return this.parkedCars.contains(car);
+    private boolean hasParked(UUID ticket) {
+        return this.parkedCars.containsKey(ticket);
     }
 
-    public boolean park(Car car) {
-        if (this.isFull()) {
-            return false;
-        } else {
-            this.parkedCars.add(car);
-            return true;
-        }
+    public int getNumberOfFreeSpace(){
+        return capacity - parkedCars.size();
     }
 
-    public boolean pick(Car car) {
-        if (this.hasParked(car)) {
-            this.parkedCars.remove(car);
-            return true;
-        } else {
-            return false;
+    public UUID park(Car car) {
+        if(!this.isFull()) {
+            UUID ticket = UUID.randomUUID();
+            this.parkedCars.put(ticket, car);
+            return ticket;
         }
+        return null;
+    }
+
+    public Car pick(UUID ticket) {
+        if (this.hasParked(ticket)) {
+            Car car = this.parkedCars.get(ticket);
+            this.parkedCars.remove(ticket);
+            return car;
+        }
+        return null;
     }
 }

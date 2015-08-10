@@ -2,33 +2,34 @@ package oo.bootcamp.practice.parkinglot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class ParkingBoy {
     private List<ParkingLot> parkingLots = new ArrayList<ParkingLot>();
-
-    public ParkingBoy(ParkingLot parkingLot) {
-        this.parkingLots.add(parkingLot);
-    }
 
     public ParkingBoy(List<ParkingLot> parkingLots) {
         this.parkingLots.addAll(parkingLots);
     }
 
-    public boolean park(Car car){
+    public UUID park(Car car){
+        UUID ticket = null;
         for(ParkingLot parkingLot : this.parkingLots) {
-            if(parkingLot.park(car)){
-                return true;
+            ticket = parkingLot.park(car);
+            if(ticket!=null){
+                break;
             }
         }
-        return false;
+        return ticket;
     }
 
-    public boolean pick(Car car){
+    public Car pick(UUID ticket){
+        Car car = null;
         for(ParkingLot parkingLot : this.parkingLots) {
-            if(parkingLot.pick(car)){
-                return true;
+            car = parkingLot.pick(ticket);
+            if(car!=null){
+                break;
             }
         }
-        return false;
+        return car;
     }
 }
