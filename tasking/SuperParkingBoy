@@ -1,0 +1,37 @@
+SuperParkingBoy:
+
+1.
+one parkinglot one empty space
+one car coming
+superparkingboy can park car
+
+2.
+one parkinglot one empty space
+one car parked in the parkinglot
+superparkingboy can pick car
+
+3.
+one parkinglot one empty space
+one car parked in the parkinglot
+superparkingboy cannot pick car second time
+
+4. parking lot with 1 capacity and 1 car
+parking boy park car
+then: parking boy cannot park car
+
+
+5.
+two parkinglots with same empty rate
+one car coming
+superparkingboy can park car in first parkinglot
+
+6.
+two parkinglots with different empty rate
+one car coming
+superparkingboy can park car in the parkinglot with larger empty rate
+
+7.
+given: 2 parking lot with 1 capacity each, both full
+when: parking boy park car
+then: parking boy cannot park car
+

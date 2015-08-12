@@ -13,6 +13,10 @@ public class ParkingLot {
         parkedCars = new HashMap<>();
     }
 
+    public int getCapacity() {
+        return capacity;
+    }
+
     private boolean isFull() {
         return this.capacity == parkedCars.size();
     }
@@ -21,8 +25,8 @@ public class ParkingLot {
         return this.parkedCars.containsKey(ticket);
     }
 
-    public int getNumberOfFreeSpace(){
-        return capacity - parkedCars.size();
+    public Map<UUID, Car> getParkedCars() {
+        return parkedCars;
     }
 
     public UUID park(Car car) {

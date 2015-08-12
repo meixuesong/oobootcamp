@@ -1,14 +1,12 @@
 package oo.bootcamp.practice.parkinglot;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class ParkingBoy {
-    private List<ParkingLot> parkingLots = new ArrayList<ParkingLot>();
+public class ParkingBoy extends  ParkingBoyBase {
 
     public ParkingBoy(List<ParkingLot> parkingLots) {
-        this.parkingLots.addAll(parkingLots);
+        super(parkingLots);
     }
 
     public UUID park(Car car){
@@ -22,14 +20,4 @@ public class ParkingBoy {
         return ticket;
     }
 
-    public Car pick(UUID ticket){
-        Car car = null;
-        for(ParkingLot parkingLot : this.parkingLots) {
-            car = parkingLot.pick(ticket);
-            if(car!=null){
-                break;
-            }
-        }
-        return car;
-    }
 }
