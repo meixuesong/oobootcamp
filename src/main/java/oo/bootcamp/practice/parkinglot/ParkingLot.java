@@ -8,15 +8,6 @@ public class ParkingLot {
     private int capacity;
     private Map<UUID, Car> parkedCars;
 
-    public ParkingLot(int capacity) {
-        this.capacity = capacity;
-        parkedCars = new HashMap<>();
-    }
-
-    public int getCapacity() {
-        return capacity;
-    }
-
     private boolean isFull() {
         return this.capacity == parkedCars.size();
     }
@@ -25,12 +16,29 @@ public class ParkingLot {
         return this.parkedCars.containsKey(ticket);
     }
 
-    public Map<UUID, Car> getParkedCars() {
+    private int getCapacity() {
+        return capacity;
+    }
+
+    private Map<UUID, Car> getParkedCars() {
         return parkedCars;
     }
 
+    public ParkingLot(int capacity) {
+        this.capacity = capacity;
+        parkedCars = new HashMap<>();
+    }
+
+    public int getNumberOfFreeSpace() {
+        return getCapacity() - getParkedCars().size();
+    }
+
+    public double getEmptyRate() {
+        return getCapacity() == 0 ? 0 : getNumberOfFreeSpace() / getCapacity();
+    }
+
     public UUID park(Car car) {
-        if(!this.isFull()) {
+        if (!this.isFull()) {
             UUID ticket = UUID.randomUUID();
             this.parkedCars.put(ticket, car);
             return ticket;

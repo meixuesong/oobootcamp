@@ -17,11 +17,11 @@ public class ParkingBoyTest {
     private static final String ANOTHER_CAR_LICENSE = "ANOTHER_CAR_LICENSE";
 
     @Test
-     public void should_success_to_park_car_when_one_parkinglot_with_one_capacity(){
+    public void should_success_to_park_car_when_one_parkinglot_with_one_capacity() {
         List<ParkingLot> parkingLots = new ArrayList<>();
         ParkingLot parkingLot = new ParkingLot(1);
         parkingLots.add(parkingLot);
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+        ParkingBoy parkingBoy = ParkingBoy.parkingBoy(parkingLots);
 
         Car car = new Car(CAR_LICENSE);
         UUID ticket = parkingBoy.park(car);
@@ -30,10 +30,10 @@ public class ParkingBoyTest {
     }
 
     @Test
-    public void should_success_to_pick_car_when_parked_a_car_in_one_parkinglot_with_one_capacity(){
+    public void should_success_to_pick_car_when_parked_a_car_in_one_parkinglot_with_one_capacity() {
         List<ParkingLot> parkingLots = new ArrayList<>();
         parkingLots.add(new ParkingLot(1));
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+        ParkingBoy parkingBoy = ParkingBoy.parkingBoy(parkingLots);
 
         Car car = new Car(CAR_LICENSE);
         UUID ticket = parkingBoy.park(car);
@@ -42,11 +42,11 @@ public class ParkingBoyTest {
     }
 
     @Test
-    public void should_fail_to_park_car_when_one_parkinglot_with_one_capacity_occupied(){
+    public void should_fail_to_park_car_when_one_parkinglot_with_one_capacity_occupied() {
         List<ParkingLot> parkingLots = new ArrayList<>();
         ParkingLot parkingLot = new ParkingLot(1);
         parkingLots.add(parkingLot);
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+        ParkingBoy parkingBoy = ParkingBoy.parkingBoy(parkingLots);
         parkingLot.park(new Car(ANOTHER_CAR_LICENSE));
 
         Car car = new Car(CAR_LICENSE);
@@ -55,11 +55,11 @@ public class ParkingBoyTest {
     }
 
     @Test
-    public void should_success_to_park_car_when_two_parkinglot_both_empty(){
-        List<ParkingLot> parkingLots = new ArrayList<ParkingLot>();
+    public void should_success_to_park_car_when_two_parkinglot_both_empty() {
+        List<ParkingLot> parkingLots = new ArrayList<>();
         parkingLots.add(new ParkingLot(1));
         parkingLots.add(new ParkingLot(1));
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+        ParkingBoy parkingBoy = ParkingBoy.parkingBoy(parkingLots);
 
         Car car = new Car(CAR_LICENSE);
         UUID ticket = parkingBoy.park(car);
@@ -68,9 +68,9 @@ public class ParkingBoyTest {
     }
 
     @Test
-    public void should_success_to_park_car_when_two_parkinglot_one_empty_one_full(){
+    public void should_success_to_park_car_when_two_parkinglot_one_empty_one_full() {
         //given
-        List<ParkingLot> parkingLots = new ArrayList<ParkingLot>();
+        List<ParkingLot> parkingLots = new ArrayList<>();
 
         ParkingLot fullParkingLot = new ParkingLot(1);
         fullParkingLot.park(new Car(ANOTHER_CAR_LICENSE));
@@ -79,7 +79,7 @@ public class ParkingBoyTest {
         ParkingLot emptyParkingLot = new ParkingLot(1);
         parkingLots.add(emptyParkingLot);
 
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+        ParkingBoy parkingBoy = ParkingBoy.parkingBoy(parkingLots);
 
         //when
         Car car = new Car(CAR_LICENSE);
@@ -90,9 +90,9 @@ public class ParkingBoyTest {
     }
 
     @Test
-    public void should_success_to_park_car_in_first_parkinglot_when_two_parkinglot_first_half_full_second_empty(){
+    public void should_success_to_park_car_in_first_parkinglot_when_two_parkinglot_first_half_full_second_empty() {
         //given
-        List<ParkingLot> parkingLots = new ArrayList<ParkingLot>();
+        List<ParkingLot> parkingLots = new ArrayList<>();
 
         ParkingLot halfFullParkingLot = new ParkingLot(2);
         halfFullParkingLot.park(new Car(ANOTHER_CAR_LICENSE));
@@ -101,7 +101,7 @@ public class ParkingBoyTest {
         ParkingLot emptyParkingLot = new ParkingLot(1);
         parkingLots.add(emptyParkingLot);
 
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+        ParkingBoy parkingBoy = ParkingBoy.parkingBoy(parkingLots);
 
         //when
         Car car = new Car(CAR_LICENSE);
@@ -112,9 +112,9 @@ public class ParkingBoyTest {
     }
 
     @Test
-    public void should_success_to_park_car_in_first_parkinglog_when_two_parkinglot_with_second_full(){
+    public void should_success_to_park_car_in_first_parkinglog_when_two_parkinglot_with_second_full() {
         //given
-        List<ParkingLot> parkingLots = new ArrayList<ParkingLot>();
+        List<ParkingLot> parkingLots = new ArrayList<>();
 
         ParkingLot firstEmptyParkingLot = new ParkingLot(1);
         parkingLots.add(firstEmptyParkingLot);
@@ -126,7 +126,7 @@ public class ParkingBoyTest {
         ParkingLot thirdEmptyParkingLot = new ParkingLot(1);
         parkingLots.add(thirdEmptyParkingLot);
 
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+        ParkingBoy parkingBoy = ParkingBoy.parkingBoy(parkingLots);
 
         //when
         Car car = new Car(CAR_LICENSE);
